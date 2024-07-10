@@ -1,5 +1,6 @@
 var express = require('express');
 var router = express.Router();
+const {messages} = require('./index');
 
 /* GET users listing. */
 router.get('/', function(req, res, next) {
@@ -7,8 +8,11 @@ router.get('/', function(req, res, next) {
 });
 
 router.post('/', function(req, res, next) {
-    console.log(req.body);
-    // res.redirect('/');
+    const user_name = req.body.user_name;
+    const message = req.body.message;
+    messages.push({text: message, user: user_name, added: new Date()});
+    console.log(messages);
+    res.redirect('/');
 });
 
 module.exports = router;
